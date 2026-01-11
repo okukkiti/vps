@@ -1,0 +1,14 @@
+name: vps
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup VPS
+        run: |
+          sudo apt update
+          sudo apt install -y tmate
+          tmate -F
