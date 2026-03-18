@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup VPS
+      - name: Setup vps
         run: |
           sudo apt update
           sudo apt install -y tmate
